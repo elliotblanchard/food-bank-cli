@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "food/bank/cli/version"
+require "food-bank-cli/lib/food_bank/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "food-bank-cli"

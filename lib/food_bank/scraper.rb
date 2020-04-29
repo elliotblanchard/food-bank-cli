@@ -9,6 +9,12 @@
 #00:15:05
 #The top level that contains all the food banks MAY be doc.css(".Folder")
 #Getting all the locations MAY be doc.css(".Folder.Placemark")
+#
+#00:23:35
+#Setting up a GEM / project structure
+#
+#00:29:04
+#Setting up a git repository
 
 require 'nokogiri'
 require 'open-uri' #is this needed for an XML file?
