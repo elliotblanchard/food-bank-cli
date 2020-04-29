@@ -15,7 +15,14 @@
 #
 #00:29:04
 #Setting up a git repository
+#
+#00:36:01
+#Setting up the project structure so you can run the project from ./bin etc 
+#
+#00:46:00
+#Stopped watching
 
 require 'nokogiri'
 require 'open-uri' #is this needed for an XML file?
 
+puts "Hello world"
