@@ -28,6 +28,9 @@ How to correctly add dependencies (like Pry, Nokogiri, **and likely the location
 Part two:
 https://www.youtube.com/watch?v=TaRZ9Z8dK2s&feature=emb_logo
 
+00:09:46
+Remember to run "bundle install" every time you re-open your project or none of the gems will work
+
 1. Flow
 .1a. User is asked for address
 .1b. User is asked for desired time / day of week
