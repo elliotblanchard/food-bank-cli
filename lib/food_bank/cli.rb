@@ -1,5 +1,7 @@
 # Our CLI Controller
 class FoodBank::CLI
+  @time = {}
+  @address = {}
   
   def call
     puts "Find some open food banks near you in New York City."
@@ -19,10 +21,10 @@ class FoodBank::CLI
     days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     
     #list the days
-    puts "Enter the number of the day you're available:"
-    days.each_with_index { |day,index| 
+    puts "\nEnter the number of the day you are available:"
+    days.each_with_index do |day,index| 
       puts "#{index+1}. #{day}"
-    }
+    end
     
   end
   
