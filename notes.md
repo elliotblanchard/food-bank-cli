@@ -25,6 +25,9 @@ Planning the program
 01:15:00
 How to correctly add dependencies (like Pry, Nokogiri, **and likely the location gem**) - and how to do 'bundle_install' correctly - all gems likely have to go in the gemspec file AND food_bank.rb
 
+Part two:
+https://www.youtube.com/watch?v=TaRZ9Z8dK2s&feature=emb_logo
+
 1. Flow
 .1a. User is asked for address
 .1b. User is asked for desired time / day of week
