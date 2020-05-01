@@ -41,15 +41,15 @@ class FoodBank::Scraper
       days[6] = bank.css("ExtendedData Data[name='Saturday']").text.strip
       
       banks[index] = {
-        :name => bank.css("name").text.strip
-        :address => bank.css("address").text.strip
-        :contact => bank.css("ExtendedData Data[name='Contact']").text.strip
-        :phone => bank.css("ExtendedData Data[name='Phone']").text.strip
-        :program => bank.css("ExtendedData Data[name='Program Type']").text.strip
-        :address => bank.css("ExtendedData Data[name='Address']").text.strip
-        :city => bank.css("ExtendedData Data[name='City']").text.strip
-        :state => bank.css("ExtendedData Data[name='State']").text.strip
-        :zip => bank.css("ExtendedData Data[name='ZIP Code']").text.strip
+        :name => bank.css("name").text.strip,
+        :address => bank.css("address").text.strip,
+        :contact => bank.css("ExtendedData Data[name='Contact']").text.strip,
+        :phone => bank.css("ExtendedData Data[name='Phone']").text.strip,
+        :program => bank.css("ExtendedData Data[name='Program Type']").text.strip,
+        :address => bank.css("ExtendedData Data[name='Address']").text.strip,
+        :city => bank.css("ExtendedData Data[name='City']").text.strip,
+        :state => bank.css("ExtendedData Data[name='State']").text.strip,
+        :zip => bank.css("ExtendedData Data[name='ZIP Code']").text.strip,
         :days => days
       }
       
