@@ -10,10 +10,9 @@ class FoodBank::CLI
     puts "Find some open food banks near you in New York City."
     
     get_user_address
-    
     get_user_day_time
     
-    #banks = Bank.new - scraper
+    #scraper = Scraper.new
     
     #list_food_banks(banks,@address,@time)
     
@@ -47,7 +46,9 @@ class FoodBank::CLI
     
     @address[:zip] = input
     
-    binding.pry
+    #binding.pry
+    
+    #Is there a way to validate the address?
   end
   
   def get_user_day_time

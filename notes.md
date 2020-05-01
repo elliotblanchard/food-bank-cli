@@ -25,11 +25,17 @@ Planning the program
 01:15:00
 How to correctly add dependencies (like Pry, Nokogiri, **and likely the location gem**) - and how to do 'bundle_install' correctly - all gems likely have to go in the gemspec file AND food_bank.rb
 
-Part two:
+Part two (mainly setting up the CLI):
 https://www.youtube.com/watch?v=TaRZ9Z8dK2s&feature=emb_logo
 
 00:09:46
 Remember to run "bundle install" every time you re-open your project or none of the gems will work
+
+Part three
+https://www.youtube.com/watch?v=VMAW3VjPUPw&feature=emb_logo
+
+00:24:33
+Building a scraper
 
 1. Flow
 .1a. User is asked for address
