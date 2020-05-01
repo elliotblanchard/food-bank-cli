@@ -9,10 +9,12 @@ class FoodBank::CLI
   def call
     puts "Find some open food banks near you in New York City."
     
-    get_user_address
-    get_user_day_time
+    #get_user_address
+    #get_user_day_time
     
-    #scraper = Scraper.new
+    FoodBank::Scraper.scrape_banks
+    
+    #scraper = Scraper.new - scraper shouldn't be in the CLI
     
     #list_food_banks(banks,@address,@time)
     
