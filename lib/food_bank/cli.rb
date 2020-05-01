@@ -2,22 +2,52 @@
 class FoodBank::CLI
   
   def initialize
-    @time = {}
     @address = {}
+    @time = {}
   end
   
   def call
     puts "Find some open food banks near you in New York City."
     
-    #get_user_address
+    get_user_address
     
     get_user_day_time
     
-    #get_food_banks(address,time)
+    #banks = Bank.new - scraper
     
-    #list_food_banks
+    #list_food_banks(banks,@address,@time)
     
     #binding.pry
+  end
+  
+  def get_user_address
+    input_correct = false
+    input = ""
+    
+    until input_correct == true
+      puts "\nWhat is your address? For example: '123 4th Avenue'"
+      input = gets.strip
+      if input != "" 
+        input_correct = true
+      end
+    end
+    
+    @address[:street] = input
+    
+    input_correct = false
+    
+    until input_correct == true
+      puts "\nWhat is your ZIP code? For example: '11231'"
+      input = gets.strip
+      input = input.to_i
+      if input.to_s.length == 5
+        input_correct = true
+      end
+    end
+    
+    @address[:zip] = input
+    
+    binding.pry
   end
   
   def get_user_day_time
@@ -61,9 +91,7 @@ class FoodBank::CLI
       end
     end
     
-    @time[:AMPM] = input
-    
-    binding.pry
+    @time[:ampm] = input
     
   end
   
