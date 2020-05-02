@@ -12,11 +12,10 @@ class FoodBank::CLI
     
     #FoodBank::Mapping.get_distance
     
-    make_banks
     get_user_info
+    make_banks
+    find_banks
     
-    #get_user_address
-    #get_user_day_time
     #FoodBank::Scraper.scrape_banks
     #FoodBank::Mapping.get_distance
     #scraper = Scraper.new - scraper shouldn't be in the CLI
@@ -27,7 +26,17 @@ class FoodBank::CLI
   def make_banks
     banks_array = FoodBank::Scraper.scrape_banks(BASE_PATH)
     FoodBank::Bank.create_from_collection(banks_array)
-  end  
+  end 
+  
+  def find_banks
+    #Find matching food banks
+    
+    #Find food banks open at the right time
+    same_time = FoodBank::Bank.find_by_time(@time)
+    
+    binding.pry
+    
+  end
   
   def get_user_info
     get_user_address
@@ -80,7 +89,6 @@ class FoodBank::CLI
     else
       @address[:borough] = FoodBank::Mapping.check_address(address_string) 
     end
-    binding.pry
   
   end
   
@@ -101,7 +109,7 @@ class FoodBank::CLI
       input = input.to_i
     end
     
-    @time[:day] = days[input-1]
+    @time[:day] = input-1
     
     until input_correct == true
       #enter time
