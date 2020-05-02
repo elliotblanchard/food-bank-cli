@@ -1,4 +1,8 @@
-class FoodBank::Distance
+class FoodBank::Mapping
+  
+  def self.check_address(address)
+    
+  end
   
   def self.get_distance
     # You can also use the free API key instead of signed requests

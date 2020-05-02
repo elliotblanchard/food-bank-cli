@@ -52,3 +52,8 @@ Building a scraper
 3. Class relationships
 4. 
 
+For an address to be correct, looks like:
+ @street_address=nil,
+ @street_name=nil,
+ @street_number=nil,
+None of these can be nil

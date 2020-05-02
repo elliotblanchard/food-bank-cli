@@ -10,11 +10,15 @@ class FoodBank::CLI
   def call
     puts "Find open food banks near you in New York City."
     
+    #FoodBank::Mapping.get_distance
+    
     make_banks
+    get_user_info
+    
     #get_user_address
     #get_user_day_time
     #FoodBank::Scraper.scrape_banks
-    #FoodBank::Distance.get_distance
+    #FoodBank::Mapping.get_distance
     #scraper = Scraper.new - scraper shouldn't be in the CLI
     #list_food_banks(banks,@address,@time)
     binding.pry
@@ -25,7 +29,13 @@ class FoodBank::CLI
     FoodBank::Bank.create_from_collection(banks_array)
   end  
   
+  def get_user_info
+    get_user_address
+    get_user_day_time
+  end
+  
   def get_user_address
+    borough = ['Manhattan','Brooklyn','Queens','Bronx','Staten Island']
     input_correct = false
     input = ""
     
@@ -52,9 +62,21 @@ class FoodBank::CLI
     
     @address[:zip] = input
     
-    #binding.pry
+    until input > 0 && input < 6
+      puts "\nEnter the number of your borough:"
+      borough.each_with_index do |borough,index| 
+        puts "#{index+1}. #{borough}"
+      end      
+      input = gets.strip
+      input = input.to_i
+    end
     
-    #Is there a way to validate the address?
+    @address[:borough] = borough[input-1]   
+    
+    binding.pry
+    
+    FoodBank::Mapping.get_distance(address_string) #validate address
+    
   end
   
   def get_user_day_time
