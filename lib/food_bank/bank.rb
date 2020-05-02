@@ -45,8 +45,10 @@ class FoodBank::Bank
       start_time_raw = time_raw[0].split(":")
       end_time_raw = time_raw[1].split(":")
       end_AMPM = end_time_raw[1].split(" ")
-      bank_time_start = {:day => 0, :hour => start_time_raw[0].to_i, :minutes => start_time_raw[1][0,2].to_i, :ampm => start_time_raw[1][-2..]}
-      bank_time_end = {:day => 0, :hour => end_time_raw[0].to_i, :minutes => end_time_raw[1][0,2].to_i, :ampm => end_AMPM[1]}
+      bank_time_start_hash = {:day => 0, :hour => start_time_raw[0].to_i, :minutes => start_time_raw[1][0,2].to_i, :ampm => start_time_raw[1][-2..]}
+      bank_time_end_hash = {:day => 0, :hour => end_time_raw[0].to_i, :minutes => end_time_raw[1][0,2].to_i, :ampm => end_AMPM[1]}
+      bank_time_start = create_time_object(bank_time_start_hash)
+      bank_time_end = create_time_object(bank_time_end_hash)
       binding.pry
     end
     
