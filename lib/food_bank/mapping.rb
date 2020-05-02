@@ -1,7 +1,16 @@
 class FoodBank::Mapping
   
   def self.check_address(address)
+    Dotenv.load('.env') #Loads the API key
+    Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
     
+    location = Geokit::Geocoders::GoogleGeocoder.geocode address
+    
+    if location.street_address == "" || location.street_address == nil  || location.street_name == "" || location.street_name == nil || location.street_number == "" || location.street_number == nil
+      return false
+    else
+      return location.city
+    end
   end
   
   def self.get_distance
@@ -9,9 +18,7 @@ class FoodBank::Mapping
     # See https://developers.google.com/maps/documentation/geocoding/#api_key
     
     Dotenv.load('.env') #Loads the API key
-    
     Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
-    #binding.pry
 
     a=Geokit::Geocoders::GoogleGeocoder.geocode '140 Market St, San Francisco, CA'
     puts (a.ll) #Lat / Long

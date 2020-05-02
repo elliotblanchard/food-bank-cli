@@ -35,7 +35,7 @@ class FoodBank::CLI
   end
   
   def get_user_address
-    borough = ['Manhattan','Brooklyn','Queens','Bronx','Staten Island']
+    #borough = ['Manhattan','Brooklyn','Queens','Bronx','Staten Island']
     input_correct = false
     input = ""
     
@@ -62,23 +62,30 @@ class FoodBank::CLI
     
     @address[:zip] = input
     
-    until input > 0 && input < 6
-      puts "\nEnter the number of your borough:"
-      borough.each_with_index do |borough,index| 
-        puts "#{index+1}. #{borough}"
-      end      
-      input = gets.strip
-      input = input.to_i
+    #until input > 0 && input < 6
+    #  puts "\nEnter the number of your borough:"
+    #  borough.each_with_index do |borough,index| 
+    #    puts "#{index+1}. #{borough}"
+    #  end      
+    #  input = gets.strip
+    #  input = input.to_i
+    #end
+    
+    address_string = @address[:street] + ", New York, NY, " + @address[:zip].to_s
+    
+    #validate address
+    if FoodBank::Mapping.check_address(address_string) == false
+      puts "Can't find your address. Please try again."
+      get_user_address
+    else
+      @address[:borough] = FoodBank::Mapping.check_address(address_string) 
     end
-    
-    @address[:borough] = borough[input-1]   
-    
     binding.pry
-    
-    FoodBank::Mapping.get_distance(address_string) #validate address
-    
+  
   end
   
+  
+      
   def get_user_day_time
     days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     input = 0
