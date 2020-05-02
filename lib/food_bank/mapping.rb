@@ -13,22 +13,35 @@ class FoodBank::Mapping
     end
   end
   
-  def self.get_distance
+  def self.get_distance(user_address,banks)
     # You can also use the free API key instead of signed requests
     # See https://developers.google.com/maps/documentation/geocoding/#api_key
+    # Return array of food banks sorted by distance
     
     Dotenv.load('.env') #Loads the API key
     Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
 
-    a=Geokit::Geocoders::GoogleGeocoder.geocode '140 Market St, San Francisco, CA'
-    puts (a.ll) #Lat / Long
-    b=Geokit::Geocoders::GoogleGeocoder.geocode '789 Geary St, San Francisco, CA'
-    puts (b.ll) #Lat / Long
-    puts (a.distance_to(b)) #In miles
+    print "Calculating distances"
     
-    #As stub, just return a random distance between 1 and 10
+    # First get distances for each of the food banks
+    banks.each_with_index do |bank, index|
+      user_location = Geokit::Geocoders::GoogleGeocoder.geocode user_address
+      bank_location = Geokit::Geocoders::GoogleGeocoder.geocode bank.address
+      banks[index].distance = user_location.distance_to(bank_location)
+      print "."
+    end
     
-    #To keep manageable, only calculate distances for food banks in same borough
+    puts " "
+    banks_sorted = banks.sort_by { |bank| bank.distance }
+    
+    banks_sorted
+    
+    #a=Geokit::Geocoders::GoogleGeocoder.geocode '140 Market St, San Francisco, CA'
+    #puts (a.ll) #Lat / Long
+    #b=Geokit::Geocoders::GoogleGeocoder.geocode '789 Geary St, San Francisco, CA'
+    #puts (b.ll) #Lat / Long
+    #puts (a.distance_to(b)) #In miles
+    
 
   end
 end

@@ -5,6 +5,7 @@ class FoodBank::CLI
   def initialize
     @address = {}
     @time = {}
+    @user_address = ""
   end
   
   def call
@@ -12,15 +13,14 @@ class FoodBank::CLI
     
     #FoodBank::Mapping.get_distance
     
-    get_user_info
-    make_banks
-    find_banks
+    get_user_info          #collects user info
+    make_banks             #scrapes data and creates bank objects
+    list_banks(find_banks) #shows the matching banks
     
     #FoodBank::Scraper.scrape_banks
     #FoodBank::Mapping.get_distance
     #scraper = Scraper.new - scraper shouldn't be in the CLI
     #list_food_banks(banks,@address,@time)
-    binding.pry
   end
   
   def make_banks
@@ -33,9 +33,15 @@ class FoodBank::CLI
     
     #Find food banks open at the right time
     same_time = FoodBank::Bank.find_by_time(@time)
+    if same_time.length > 0
+      banks_sorted = FoodBank::Mapping.get_distance(@user_address,same_time)
+    end
     
-    binding.pry
+    #banks_sorted.each do |bank|
+    #  puts bank.distance
+    #end
     
+    banks_sorted
   end
   
   def get_user_info
@@ -80,19 +86,28 @@ class FoodBank::CLI
     #  input = input.to_i
     #end
     
-    address_string = @address[:street] + ", New York, NY, " + @address[:zip].to_s
+    @user_address = @address[:street] + ", New York, NY, " + @address[:zip].to_s
     
     #validate address
-    if FoodBank::Mapping.check_address(address_string) == false
+    if FoodBank::Mapping.check_address(@user_address) == false
       puts "Can't find your address. Please try again."
       get_user_address
     else
-      @address[:borough] = FoodBank::Mapping.check_address(address_string) 
+      @address[:borough] = FoodBank::Mapping.check_address(@user_address) 
     end
   
   end
   
-  
+  def list_banks(banks)
+    if banks.length > 0 
+      puts "These are the 5 closest food banks open during your selected time:"
+      for i in 0..4
+        puts "#{i}. #{banks[i].name}, #{banks[i].distance.round(2)} miles."
+      end
+    else
+      puts "No food banks matched your selected time."
+    end
+  end
       
   def get_user_day_time
     days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']

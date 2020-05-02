@@ -51,7 +51,8 @@ class FoodBank::Scraper
         :city => bank.css("ExtendedData Data[name='City']").text.strip,
         :state => bank.css("ExtendedData Data[name='State']").text.strip,
         :zip => bank.css("ExtendedData Data[name='ZIP Code']").text.strip,
-        :days => days
+        :days => days,
+        :distance => 0
       }
       
     end
