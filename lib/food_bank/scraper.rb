@@ -25,8 +25,9 @@ class FoodBank::Scraper
   #...sunday: bank.css("ExtendedData Data[name='Sunday']").text.strip
   #page.css("li[data-category='news']")
   
-  def self.scrape_banks
-    xml = File.read('fixtures/Food_Bank_For_NYC_Open_Members_as_of_42820.kml')
+  def self.scrape_banks(path)
+    #xml = File.read('fixtures/Food_Bank_For_NYC_Open_Members_as_of_42820.kml')
+    xml = File.read(path)
     doc = Nokogiri::XML(xml)  
     banks = []
     

@@ -1,27 +1,29 @@
 # Our CLI Controller
 class FoodBank::CLI
-  
+  BASE_PATH = "fixtures/Food_Bank_For_NYC_Open_Members_as_of_42820.kml"
+
   def initialize
     @address = {}
     @time = {}
   end
   
   def call
-    puts "Find some open food banks near you in New York City."
+    puts "Find open food banks near you in New York City."
     
+    make_banks
     #get_user_address
     #get_user_day_time
-    
     #FoodBank::Scraper.scrape_banks
-    
-    FoodBank::Distance.get_distance
-    
+    #FoodBank::Distance.get_distance
     #scraper = Scraper.new - scraper shouldn't be in the CLI
-    
     #list_food_banks(banks,@address,@time)
-    
-    #binding.pry
+    binding.pry
   end
+  
+  def make_banks
+    banks_array = FoodBank::Scraper.scrape_banks(BASE_PATH)
+    FoodBank::Bank.create_from_collection(banks_array)
+  end  
   
   def get_user_address
     input_correct = false
