@@ -46,7 +46,7 @@ class FoodBank::Scraper
         :contact => bank.css("ExtendedData Data[name='Contact']").text.strip,
         :phone => bank.css("ExtendedData Data[name='Phone']").text.strip,
         :program => bank.css("ExtendedData Data[name='Program Type']").text.strip,
-        :address => bank.css("ExtendedData Data[name='Address']").text.strip,
+        #:address => bank.css("ExtendedData Data[name='Address']").text.strip,
         :city => bank.css("ExtendedData Data[name='City']").text.strip,
         :state => bank.css("ExtendedData Data[name='State']").text.strip,
         :zip => bank.css("ExtendedData Data[name='ZIP Code']").text.strip,
@@ -55,7 +55,8 @@ class FoodBank::Scraper
       
     end
     
-    binding.pry
+    banks
+    #binding.pry
     
   end
   

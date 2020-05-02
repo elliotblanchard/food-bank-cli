@@ -12,7 +12,9 @@ class FoodBank::CLI
     #get_user_address
     #get_user_day_time
     
-    FoodBank::Scraper.scrape_banks
+    #FoodBank::Scraper.scrape_banks
+    
+    FoodBank::Distance.get_distance
     
     #scraper = Scraper.new - scraper shouldn't be in the CLI
     
