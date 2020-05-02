@@ -6,6 +6,8 @@ require_relative './food_bank/distance'
 require 'pry'
 require 'nokogiri'
 require 'geokit'
+require 'dotenv'
+
 
 module FoodBank
   class Error < StandardError; end

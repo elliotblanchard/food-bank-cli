@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_dependency "nokogiri"
   spec.add_dependency "rake", ">= 12.3.3"
+  spec.add_dependency "dotenv", "~> 2.7", ">= 2.7.5"
 end

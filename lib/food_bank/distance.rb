@@ -3,7 +3,12 @@ class FoodBank::Distance
   def self.get_distance
     # You can also use the free API key instead of signed requests
     # See https://developers.google.com/maps/documentation/geocoding/#api_key
-    Geokit::Geocoders::GoogleGeocoder.api_key = ''    
+    #Geokit::Geocoders::GoogleGeocoder.api_key = 'AIzaSyD0JDydqlsutbIvduWLarwBdl49CcbBeog'
+    
+    Dotenv.load('.env') #Loads the API key
+    
+    Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
+    binding.pry
 
     a=Geokit::Geocoders::GoogleGeocoder.geocode '140 Market St, San Francisco, CA'
     puts (a.ll) #Lat / Long
