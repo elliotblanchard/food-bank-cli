@@ -7,7 +7,7 @@ class FoodBank::Distance
     Dotenv.load('.env') #Loads the API key
     
     Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
-    binding.pry
+    #binding.pry
 
     a=Geokit::Geocoders::GoogleGeocoder.geocode '140 Market St, San Francisco, CA'
     puts (a.ll) #Lat / Long
