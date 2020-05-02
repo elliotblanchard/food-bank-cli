@@ -35,7 +35,22 @@ class FoodBank::Bank
     
     # Need to make a time object for the beginning and end times - then compare to see if it's in the range, using this method:
     # https://stackoverflow.com/questions/4521921/how-to-know-if-todays-date-is-in-a-date-range
-    binding.pry
+    # 1:00 PM - 3:00 PM (By appointment only)
+    # 12:00 PM - 02:00 PM (By appointment only)
+    
+    correct_time = []
+    
+    correct_day.each do |bank| 
+      time_raw = bank.days[time_hash[:day]].split(" - ")
+      start_time_raw = time_raw[0].split(":")
+      end_time_raw = time_raw[1].split(":")
+      end_AMPM = end_time_raw[1].split(" ")
+      bank_time_start = {:day => 0, :hour => start_time_raw[0].to_i, :minutes => start_time_raw[1][0,2].to_i, :ampm => start_time_raw[1][-2..]}
+      bank_time_end = {:day => 0, :hour => end_time_raw[0].to_i, :minutes => end_time_raw[1][0,2].to_i, :ampm => end_AMPM[1]}
+      binding.pry
+    end
+    
+    #binding.pry
   end
   
   def self.create_time_object(time_hash)
