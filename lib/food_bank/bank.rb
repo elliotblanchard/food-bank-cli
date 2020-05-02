@@ -27,12 +27,14 @@ class FoodBank::Bank
   #end  
   
   def self.find_by_time(time_hash)
-    binding.pry
     # Get food banks that are open on the correct day
     correct_day = self.all.select {|a| a.days[time_hash[:day]].include? "M"}
     
     # Create a time object from the user requested time
     user_time = create_time_object(time_hash)
+    
+    # Need to make a time object for the beginning and end times - then compare to see if it's in the range, using this method:
+    # https://stackoverflow.com/questions/4521921/how-to-know-if-todays-date-is-in-a-date-range
     binding.pry
   end
   
