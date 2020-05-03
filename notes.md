@@ -90,6 +90,7 @@ XXX Fix loading message
 * Clean up code
 * Catch the Google API exception
 * Find better solution to re-generating .env file every time
+* Multi-thread location search?
 XXX Put full loop so they can search again, or exit completely
 XXX Fix some time errors - if you search at 3:13PM Tuesday around 1005 Manhattan Ave, 11222 - it shows food banks that close at 3
 XXX 'CCNS-St. Marks' causes problems:
