@@ -60,5 +60,8 @@ Borough names returned by Google:
 * Staten Island
 * 
 Try to remove duplicate entries and New York Common Pantry
-Dupes: The Campaign Against Hunger
+Dupes: 
+The Campaign Against Hunger
+Masbia of Queens
+Masbia of Boro Park
 The "all" command isn't working right - it displays more than 5

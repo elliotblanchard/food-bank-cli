@@ -115,7 +115,7 @@ class FoodBank::CLI
        if input == "exit"
          continue = false
        elsif input == "all"
-         for k in 0..banks.length-1
+         for k in 0..4
            print_banks(banks,k)
          end 
        elsif (input.to_i > 0) && (input.to_i < (banks.length + 1)) 
@@ -132,17 +132,19 @@ class FoodBank::CLI
   
   def print_banks(banks,index)
     #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
-    puts "Name:     #{banks[index].name}"
-    puts "Address:  #{banks[index].address}"
-    puts "Type:     #{banks[index].program}"
-    puts "Phone:    #{banks[index].phone}"
-    puts "Contact:  #{banks[index].contact}"
-    puts "Distance: #{banks[index].distance.round(2)} miles"
-    puts "Hours: "
-    banks[index].days.each_with_index do |day, index|
-      puts "...#{@days[index]}: #{day}"
+    if banks[index] != nil
+      puts "Name:     #{banks[index].name}"
+      puts "Address:  #{banks[index].address}"
+      puts "Type:     #{banks[index].program}"
+      puts "Phone:    #{banks[index].phone}"
+      puts "Contact:  #{banks[index].contact}"
+      puts "Distance: #{banks[index].distance.round(2)} miles"
+      puts "Hours: "
+      banks[index].days.each_with_index do |day, index|
+        puts "...#{@days[index]}: #{day}"
+      end
+      puts "..."
     end
-    puts "..."
   end
       
   def get_user_day_time
