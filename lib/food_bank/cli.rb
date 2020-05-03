@@ -10,11 +10,11 @@ class FoodBank::CLI
   end
   
   def call
+    make_banks #scrapes data and creates bank objects
     input = ""
     until input == "no"
       puts "Find open food banks near you in New York City."
       get_user_info          #collects user info
-      make_banks             #scrapes data and creates bank objects
       list_banks(find_banks) #shows the matching banks
       print "Search again? Enter '"
       print "yes".colorize(:green)
