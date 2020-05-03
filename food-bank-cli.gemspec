@@ -43,4 +43,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri"
   spec.add_dependency "rake", ">= 12.3.3"
   spec.add_dependency "dotenv", "~> 2.7", ">= 2.7.5"
+  spec.add_dependency "colorize", "~> 0.8.1"
 end

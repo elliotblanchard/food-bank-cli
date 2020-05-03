@@ -21,7 +21,7 @@ class FoodBank::Mapping
     Dotenv.load('.env') #Loads the API key
     Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
 
-    print "Looking up distances "
+    puts "Looking up distances "
     
     # First get distances for each of the food banks
     banks.each_with_index do |bank, index|
@@ -29,15 +29,9 @@ class FoodBank::Mapping
       bank_location = Geokit::Geocoders::GoogleGeocoder.geocode bank.address
       banks[index].distance = user_location.distance_to(bank_location)
       sleep(0.125)
-      #if index < 10
-      # print "\b\b\b\b" 
-      #elsif index < 100
-      # print "\b\b"
-      #else
-      # print "\b\b\b"
-      #end
-      #puts "#{banks.length/(index+1)}%"
-      print "."
+      print "\b\b\b\b\b\b\b\b\b\b" 
+      percent_complete = (index.to_f+1.0)/banks.length.to_f
+      print "#{(percent_complete.round(2)*100).to_i}%"
     end
     
     puts "\n"

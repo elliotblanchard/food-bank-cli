@@ -58,10 +58,17 @@ Borough names returned by Google:
 * The Bronx
 * Queens
 * Staten Island
-* 
+
 Try to remove duplicate entries and New York Common Pantry
 Dupes - or can you auto-detect duplicates when showing top 5 - SEEMS BETTER: 
 The Campaign Against Hunger
 Masbia of Queens
 Masbia of Boro Park
-The "all" command isn't working right - it displays more than 5
+
+* Remove duplicates - maybe just don't even add it during scraping if it already exists (dupe shows at 2PM Tuesday 92-10 Atlantic Ave, Queens, NY 11416)
+* Consolidate time into one entry
+* Colored text
+* Fix loading message
+* Remove commenting
+* Clean up code
+* Catch the Google API exception

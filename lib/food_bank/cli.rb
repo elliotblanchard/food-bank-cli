@@ -134,14 +134,22 @@ class FoodBank::CLI
     #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
     if banks[index] != nil
       puts "Name:     #{banks[index].name}"
+      sleep(0.1)
       puts "Address:  #{banks[index].address}"
+      sleep(0.1)
       puts "Type:     #{banks[index].program}"
+      sleep(0.1)
       puts "Phone:    #{banks[index].phone}"
+      sleep(0.1)
       puts "Contact:  #{banks[index].contact}"
+      sleep(0.1)
       puts "Distance: #{banks[index].distance.round(2)} miles"
+      sleep(0.1)
       puts "Hours: "
+      sleep(0.1)
       banks[index].days.each_with_index do |day, index|
         puts "...#{@days[index]}: #{day}"
+        sleep(0.1)
       end
       puts "..."
     end
