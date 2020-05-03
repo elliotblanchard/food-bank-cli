@@ -6,6 +6,7 @@ class FoodBank::CLI
     @address = {}
     @time = {}
     @user_address = ""
+    @days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
   end
   
   def call
@@ -100,24 +101,27 @@ class FoodBank::CLI
   
   def list_banks(banks)
     if banks.length > 0 
-      puts "These are the 5 closest food banks open during your selected time:"
+      puts "\nThese are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]+1]}:"
       for i in 0..4
-        puts "#{i}. #{banks[i].name}, #{banks[i].distance.round(2)} miles."
+        if banks[i] != nil
+          puts "#{i+1}. #{banks[i].name}: #{banks[1].program} (#{banks[i].distance.round(2)} miles)"
+        end
       end
+      #binding.pry
+      puts "\nEnter a number for info on a food bank or 'all' for every food bank:"
     else
       puts "No food banks matched your selected time."
     end
   end
       
   def get_user_day_time
-    days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     input = 0
     input_correct = false
     
     until input > 0 && input < 8
       #list the days
       puts "\nEnter the number of the day you are available:"
-      days.each_with_index do |day,index| 
+      @days.each_with_index do |day,index| 
         puts "#{index+1}. #{day}"
       end
       input = gets.strip
@@ -131,7 +135,7 @@ class FoodBank::CLI
       puts "\nWhat time are you available? For example: '11:30'"
       input = gets.strip
       time_elements = input.split(":")
-      if time_elements.length == 2 && (time_elements[0].to_i > 0 && time_elements[0].to_i < 13) && (time_elements[1].to_i > 0 && time_elements[1].to_i < 60)
+      if time_elements.length == 2 && (time_elements[0].to_i > 0 && time_elements[0].to_i < 13) && (time_elements[1].to_i > -1 && time_elements[1].to_i < 60)
         input_correct = true
       end
     end
