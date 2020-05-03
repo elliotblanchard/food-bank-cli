@@ -102,11 +102,11 @@ class FoodBank::CLI
         for i in 0..4
           if banks[i] != nil
             print "#{i+1}. #{banks[i].name}: "
-            print "#{banks[i].program} ".colorize(:light_white)
-            print "(#{banks[i].distance.round(2)} miles)\n"
+            print "#{banks[i].program} ".colorize(:light_yellow)
+            print "(#{banks[i].distance.round(2)} miles)\n".colorize(:yellow)
          end
        end
-       #binding.pry
+       puts "Call ahead to confirm hours."
        print "\nEnter a number for more info, '"
        print "all".colorize(:green)
        print "' for every food bank, or '"
@@ -134,26 +134,32 @@ class FoodBank::CLI
   def print_banks(banks,index)
     #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
     if banks[index] != nil
-      print "Name:".colorize(:light_white,)
-      print "     #{banks[index].name}"
+      print "Name:".colorize(:yellow)
+      print "     #{banks[index].name}\n"
       sleep(0.1)
-      puts "Address:  #{banks[index].address}"
+      print "Address:".colorize(:yellow)
+      print "  #{banks[index].address}\n"
       sleep(0.1)
-      puts "Type:     #{banks[index].program}"
+      print "Type:".colorize(:yellow)
+      print"     #{banks[index].program}\n"
       sleep(0.1)
-      puts "Phone:    #{banks[index].phone}"
+      print "Phone:".colorize(:yellow)
+      print "    #{banks[index].phone}\n"
       sleep(0.1)
-      puts "Contact:  #{banks[index].contact}"
+      print "Contact:".colorize(:yellow)
+      print "  #{banks[index].contact}\n"
       sleep(0.1)
-      puts "Distance: #{banks[index].distance.round(2)} miles"
+      print "Distance:".colorize(:yellow)
+      print " #{banks[index].distance.round(2)} miles\n"
       sleep(0.1)
-      puts "Hours: "
+      print "Hours: \n".colorize(:yellow)
       sleep(0.1)
       banks[index].days.each_with_index do |day, index|
-        puts "...#{@days[index]}: #{day}"
+        print "...#{@days[index]}: ".colorize(:yellow)
+        print "#{day}\n"
         sleep(0.1)
       end
-      puts "..."
+      puts "\n"
     end
   end
       

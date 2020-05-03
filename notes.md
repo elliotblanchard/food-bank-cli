@@ -67,7 +67,7 @@ Masbia of Boro Park
 
 XXX Remove duplicates - maybe just don't even add it during scraping if it already exists (dupe shows at 2PM Tuesday 92-10 Atlantic Ave, Queens, NY 11416) - there's only two real duplicates and this code slows things down too much
 XXX Consolidate time into one entry
-* Colored text - 
+XXX Colored text - 
 * ..Possible colors: 
 * :black,
  :light_black,

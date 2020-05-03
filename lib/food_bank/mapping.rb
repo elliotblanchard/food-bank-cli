@@ -31,7 +31,7 @@ class FoodBank::Mapping
       sleep(0.125)
       print "\b\b\b\b\b\b\b\b\b\b" 
       percent_complete = (index.to_f+1.0)/banks.length.to_f
-      print "#{(percent_complete.round(2)*100).to_i}%"
+      print "#{(percent_complete.round(2)*100).to_i}%".colorize(:yellow).blink
     end
     
     puts "\n"
