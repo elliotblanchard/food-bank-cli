@@ -19,11 +19,12 @@ class FoodBank::Mapping
     Dotenv.load('.env') #Loads the API key
     Geokit::Geocoders::GoogleGeocoder.api_key = ENV['GOOGLE_API_KEY']
 
+    user_location = Geokit::Geocoders::GoogleGeocoder.geocode user_address
+    
     puts "Looking up distances "
     
     # First get distances for each of the food banks
     banks.each_with_index do |bank, index|
-      user_location = Geokit::Geocoders::GoogleGeocoder.geocode user_address
       bank_location = Geokit::Geocoders::GoogleGeocoder.geocode bank.address
       banks[index].distance = user_location.distance_to(bank_location)
       sleep(0.125)
