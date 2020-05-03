@@ -33,12 +33,19 @@ class FoodBank::Bank
       end_time_raw = time_raw[1].split(":")
       end_time_raw[1] = end_time_raw[1][0,5] #Trim edge case data
       
-      #if bank.name == "New York Common Pantry (Pantry & Soup Kitchen)"
-      #  binding.pry
-      #end
+      bank_time_start_hash = {
+        :day => 0, 
+        :hour => start_time_raw[0].strip.to_i, 
+        :minutes => start_time_raw[1].strip[0,2].to_i, 
+        :ampm => start_time_raw[1].strip[-2..]
+      }
       
-      bank_time_start_hash = {:day => 0, :hour => start_time_raw[0].strip.to_i, :minutes => start_time_raw[1].strip[0,2].to_i, :ampm => start_time_raw[1].strip[-2..]}
-      bank_time_end_hash = {:day => 0, :hour => end_time_raw[0].strip.to_i, :minutes => end_time_raw[1].strip[0,2].to_i, :ampm => end_time_raw[1][end_time_raw[1].index("M")-1,end_time_raw[1].index("M")]}
+      bank_time_end_hash = {
+        :day => 0, 
+        :hour => end_time_raw[0].strip.to_i, 
+        :minutes => end_time_raw[1].strip[0,2].to_i, 
+        :ampm => end_time_raw[1][end_time_raw[1].index("M")-1,end_time_raw[1].index("M")]
+      }
 
       bank_time_start = create_time_object(bank_time_start_hash)
       bank_time_end = create_time_object(bank_time_end_hash)
@@ -47,7 +54,6 @@ class FoodBank::Bank
       range = bank_time_start..bank_time_end
       if range === user_time 
         correct_time << bank
-        #puts "User time: #{user_time}, bank start: #{bank_time_start}, bank end: #{bank_time_end}"
       end
     end
     correct_time

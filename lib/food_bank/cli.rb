@@ -31,14 +31,11 @@ class FoodBank::CLI
   end 
   
   def find_banks
-    #Find matching food banks
-    
     #Find food banks open at the right time
     same_time = FoodBank::Bank.find_by_time(@time)
     if same_time.length > 0
       banks_sorted = FoodBank::Mapping.get_distance(@user_address,same_time)
     end
-    
     banks_sorted
   end
   
@@ -107,7 +104,7 @@ class FoodBank::CLI
             print "(#{banks[i].distance.round(2)} miles)\n".colorize(:yellow)
          end
        end
-       puts "\n\nCall ahead to confirm hours."
+       puts "\nCall ahead to confirm hours."
        print "\nEnter a number for more info, '"
        print "all".colorize(:green)
        print "' for every food bank, or '"
@@ -189,7 +186,6 @@ class FoodBank::CLI
       time_elements = input.split(":")
       minutes = time_elements[1][0,2]
       ampm = time_elements[1][3,5]
-      #binding.pry
       if time_elements.length == 2 && (time_elements[0].to_i > 0 && time_elements[0].to_i < 13) && (minutes.to_i > -1 && minutes.to_i < 60) && (ampm == "AM" || ampm == "PM")
         input_correct = true
       end
@@ -198,19 +194,6 @@ class FoodBank::CLI
     @time[:hour] = time_elements[0]
     @time[:minutes] = minutes
     @time[:ampm] = ampm
-    
-    #input_correct = false
-    
-    #until input_correct == true
-      #enter AM / PM
-    #  puts "\nAM or PM? For example 'AM'"
-    #  input = gets.strip
-    #  if input == "AM" || input == "PM"
-    #    input_correct = true
-    #  end
-    #end
-    
-    #@time[:ampm] = input
     
   end
   
