@@ -100,18 +100,49 @@ class FoodBank::CLI
   end
   
   def list_banks(banks)
-    if banks.length > 0 
-      puts "\nThese are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]+1]}:"
-      for i in 0..4
-        if banks[i] != nil
-          puts "#{i+1}. #{banks[i].name}: #{banks[1].program} (#{banks[i].distance.round(2)} miles)"
-        end
-      end
-      #binding.pry
-      puts "\nEnter a number for info on a food bank or 'all' for every food bank:"
-    else
-      puts "No food banks matched your selected time."
+    continue = true
+    until continue == false
+     if banks.length > 0 
+       puts "\nThese are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]+1]}:"
+        for i in 0..4
+          if banks[i] != nil
+            puts "#{i+1}. #{banks[i].name}: #{banks[1].program} (#{banks[i].distance.round(2)} miles)"
+         end
+       end
+       #binding.pry
+       puts "\nEnter a number for info on one, 'all' for every food bank, or 'exit' if finished:"
+       input = gets.strip
+       if input == "exit"
+         continue = false
+       elsif input == "all"
+         for k in 0..banks.length-1
+           print_banks(banks,k)
+         end 
+       elsif (input.to_i > 0) && (input.to_i < (banks.length + 1)) 
+         print_banks(banks,input.to_i-1)
+       else
+         continue = false
+       end
+     else
+        puts "No food banks matched your selected time."
+        continue = false
+     end
     end
+  end
+  
+  def print_banks(banks,index)
+    #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
+    puts "Name:     #{banks[index].name}"
+    puts "Address:  #{banks[index].address}"
+    puts "Type:     #{banks[index].program}"
+    puts "Phone:    #{banks[index].phone}"
+    puts "Contact:  #{banks[index].contact}"
+    puts "Distance: #{banks[index].distance.round(2)} miles"
+    puts "Hours: "
+    banks[index].days.each_with_index do |day, index|
+      puts "...#{@days[index]}: #{day}"
+    end
+    puts "..."
   end
       
   def get_user_day_time

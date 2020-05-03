@@ -58,3 +58,7 @@ Borough names returned by Google:
 * The Bronx
 * Queens
 * Staten Island
+* 
+Try to remove duplicate entries and New York Common Pantry
+Dupes: The Campaign Against Hunger
+The "all" command isn't working right - it displays more than 5
