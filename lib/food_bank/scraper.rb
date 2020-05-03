@@ -39,9 +39,8 @@ class FoodBank::Scraper
       days[4] = bank.css("ExtendedData Data[name='Thursday']").text.strip
       days[5] = bank.css("ExtendedData Data[name='Friday']").text.strip
       days[6] = bank.css("ExtendedData Data[name='Saturday']").text.strip
-      
-      duplicate = false
-      
+        
+      #duplicate = false
       #Skip duplicate entries
       #if banks.detect { |x| (x[:name] == bank.css("name").text.strip) && (x[:program] == bank.css("ExtendedData Data[name='Program Type']").text.strip) && (x[:address] == bank.css("address").text.strip) }
         #duplicate = true 

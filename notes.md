@@ -67,15 +67,32 @@ Masbia of Boro Park
 
 XXX Remove duplicates - maybe just don't even add it during scraping if it already exists (dupe shows at 2PM Tuesday 92-10 Atlantic Ave, Queens, NY 11416) - there's only two real duplicates and this code slows things down too much
 XXX Consolidate time into one entry
-* Colored text
+* Colored text - 
+* ..Possible colors: 
+* :black,
+ :light_black,
+ :red,
+ :light_red,
+ :green,
+ :light_green,
+ :yellow,
+ :light_yellow,
+ :blue,
+ :light_blue,
+ :magenta,
+ :light_magenta,
+ :cyan,
+ :light_cyan,
+ :white,
+ :light_white,
 XXX Fix loading message
 * Remove commenting
 * Clean up code
 * Catch the Google API exception
 * Find better solution to re-generating .env file every time
-* Put full loop so they can search again, or exit completely
+XXX Put full loop so they can search again, or exit completely
 XXX Fix some time errors - if you search at 3:13PM Tuesday around 1005 Manhattan Ave, 11222 - it shows food banks that close at 3
-* 'CCNS-St. Marks' causes problems:
-* .. Thursday: 09:30 AM - 11:30 AM (1st and 3rd Thursday of the month)
-* 'New York Common Pantry (Pantry & Soup Kitchen)' causes problems:
-* .. Thursday: Soup Kitchen 08:00 AM - 09:30 AM & Pantry 10:00 AM - 02:30 PM
+XXX 'CCNS-St. Marks' causes problems:
+XXX .. Thursday: 09:30 AM - 11:30 AM (1st and 3rd Thursday of the month)
+XXX 'New York Common Pantry (Pantry & Soup Kitchen)' causes problems:
+XXX .. Thursday: Soup Kitchen 08:00 AM - 09:30 AM & Pantry 10:00 AM - 02:30 PM

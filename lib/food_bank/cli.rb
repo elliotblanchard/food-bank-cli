@@ -10,11 +10,19 @@ class FoodBank::CLI
   end
   
   def call
-    puts "Find open food banks near you in New York City."
-    
-    get_user_info          #collects user info
-    make_banks             #scrapes data and creates bank objects
-    list_banks(find_banks) #shows the matching banks
+    input = ""
+    until input == "no"
+      puts "Find open food banks near you in New York City."
+      get_user_info          #collects user info
+      make_banks             #scrapes data and creates bank objects
+      list_banks(find_banks) #shows the matching banks
+      print "Search again? Enter '"
+      print "yes".colorize(:green)
+      print "' or '"
+      print "no".colorize(:red)
+      print "'\n"
+      input = gets.strip
+    end
   end
   
   def make_banks
@@ -44,7 +52,9 @@ class FoodBank::CLI
     input = ""
     
     until input_correct == true
-      puts "\nWhat is your address? For example: '123 4th Avenue'"
+      print "\nWhat is your address? For example: '"
+      print "123 4th Avenue".colorize(:light_blue)
+      print "'\n"
       input = gets.strip
       if input != "" 
         input_correct = true
@@ -56,7 +66,9 @@ class FoodBank::CLI
     input_correct = false
     
     until input_correct == true
-      puts "\nWhat is your ZIP code? For example: '11231'"
+      print "\nWhat is your ZIP code? For example: '"
+      print "11231".colorize(:light_blue)
+      print "'\n"
       input = gets.strip
       input = input.to_i
       if input.to_s.length == 5
@@ -70,7 +82,8 @@ class FoodBank::CLI
     
     #Validate address
     if FoodBank::Mapping.check_address(@user_address) == false
-      puts "Can't find your address. Please try again."
+      print "\nCan't find your address.".colorize(:red) 
+      print "Please try again.\n"
       get_user_address
     else
       @address[:borough] = FoodBank::Mapping.check_address(@user_address) 
@@ -81,15 +94,24 @@ class FoodBank::CLI
   def list_banks(banks)
     continue = true
     until continue == false
-     if banks.length > 0 
-       puts "\nHere are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]]}:"
+     if banks != nil
+       print "\nHere are the 5 closest food banks open at "
+       print "#{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]}".colorize(:light_blue) 
+       print " on "
+       print "#{@days[@time[:day]]}:\n".colorize(:light_blue)
         for i in 0..4
           if banks[i] != nil
-            puts "#{i+1}. #{banks[i].name}: #{banks[i].program} (#{banks[i].distance.round(2)} miles)"
+            print "#{i+1}. #{banks[i].name}: "
+            print "#{banks[i].program} ".colorize(:light_white)
+            print "(#{banks[i].distance.round(2)} miles)\n"
          end
        end
        #binding.pry
-       puts "\nEnter a number for more info, 'all' for every food bank, or 'exit' if finished:"
+       print "\nEnter a number for more info, '"
+       print "all".colorize(:green)
+       print "' for every food bank, or '"
+       print "exit".colorize(:red)
+       print "' if finished:\n"
        input = gets.strip
        if input == "exit"
          continue = false
@@ -103,7 +125,7 @@ class FoodBank::CLI
          continue = false
        end
      else
-        puts "No food banks matched your selected time."
+        puts "No food banks match your selected time.".colorize(:red)
         continue = false
      end
     end
@@ -112,7 +134,8 @@ class FoodBank::CLI
   def print_banks(banks,index)
     #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
     if banks[index] != nil
-      puts "Name:     #{banks[index].name}"
+      print "Name:".colorize(:light_white,)
+      print "     #{banks[index].name}"
       sleep(0.1)
       puts "Address:  #{banks[index].address}"
       sleep(0.1)
@@ -152,7 +175,9 @@ class FoodBank::CLI
     
     until input_correct == true
       #enter time
-      puts "\nWhat time are you available? For example: '11:30 AM'"
+      print "\nWhat time are you available? For example: '"
+      print "11:30 AM".colorize(:light_blue)
+      print "'\n"
       input = gets.strip
       time_elements = input.split(":")
       minutes = time_elements[1][0,2]
