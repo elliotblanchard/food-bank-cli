@@ -60,7 +60,7 @@ Borough names returned by Google:
 * Staten Island
 * 
 Try to remove duplicate entries and New York Common Pantry
-Dupes: 
+Dupes - or can you auto-detect duplicates when showing top 5 - SEEMS BETTER: 
 The Campaign Against Hunger
 Masbia of Queens
 Masbia of Boro Park
