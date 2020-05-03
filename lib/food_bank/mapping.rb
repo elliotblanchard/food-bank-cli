@@ -27,7 +27,6 @@ class FoodBank::Mapping
     banks.each_with_index do |bank, index|
       bank_location = Geokit::Geocoders::GoogleGeocoder.geocode bank.address
       banks[index].distance = user_location.distance_to(bank_location)
-      sleep(0.125)
       print "\b\b\b\b\b\b\b\b\b\b" 
       percent_complete = (index.to_f+1.0)/banks.length.to_f
       print "#{(percent_complete.round(2)*100).to_i}%".colorize(:yellow).blink
