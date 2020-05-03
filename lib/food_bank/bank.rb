@@ -17,21 +17,12 @@ class FoodBank::Bank
     @@all
   end
   
-  #def find_by_borough(name)
-  #  self.all.detect {|a| a.name == name}
-  #end  
-  
   def self.find_by_time(time_hash)
     # Get food banks that are open on the correct day
     correct_day = self.all.select {|a| a.days[time_hash[:day]].include? "M"}
     
     # Create a time object from the user requested time
     user_time = create_time_object(time_hash)
-    
-    # Need to make a time object for the beginning and end times - then compare to see if it's in the range, using this method:
-    # https://stackoverflow.com/questions/4521921/how-to-know-if-todays-date-is-in-a-date-range
-    # 1:00 PM - 3:00 PM (By appointment only)
-    # 12:00 PM - 02:00 PM (By appointment only)
     
     correct_time = []
     
@@ -49,6 +40,7 @@ class FoodBank::Bank
       range = bank_time_start..bank_time_end
       if range === user_time 
         correct_time << bank
+        #puts "User time: #{user_time}, bank start: #{bank_time_start}, bank end: #{bank_time_end}"
       end
     end
     correct_time

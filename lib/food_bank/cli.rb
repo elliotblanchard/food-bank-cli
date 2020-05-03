@@ -12,16 +12,9 @@ class FoodBank::CLI
   def call
     puts "Find open food banks near you in New York City."
     
-    #FoodBank::Mapping.get_distance
-    
     get_user_info          #collects user info
     make_banks             #scrapes data and creates bank objects
     list_banks(find_banks) #shows the matching banks
-    
-    #FoodBank::Scraper.scrape_banks
-    #FoodBank::Mapping.get_distance
-    #scraper = Scraper.new - scraper shouldn't be in the CLI
-    #list_food_banks(banks,@address,@time)
   end
   
   def make_banks
@@ -38,10 +31,6 @@ class FoodBank::CLI
       banks_sorted = FoodBank::Mapping.get_distance(@user_address,same_time)
     end
     
-    #banks_sorted.each do |bank|
-    #  puts bank.distance
-    #end
-    
     banks_sorted
   end
   
@@ -50,8 +39,7 @@ class FoodBank::CLI
     get_user_day_time
   end
   
-  def get_user_address
-    #borough = ['Manhattan','Brooklyn','Queens','Bronx','Staten Island']
+  def get_user_address 
     input_correct = false
     input = ""
     
@@ -78,18 +66,9 @@ class FoodBank::CLI
     
     @address[:zip] = input
     
-    #until input > 0 && input < 6
-    #  puts "\nEnter the number of your borough:"
-    #  borough.each_with_index do |borough,index| 
-    #    puts "#{index+1}. #{borough}"
-    #  end      
-    #  input = gets.strip
-    #  input = input.to_i
-    #end
-    
     @user_address = @address[:street] + ", New York, NY, " + @address[:zip].to_s
     
-    #validate address
+    #Validate address
     if FoodBank::Mapping.check_address(@user_address) == false
       puts "Can't find your address. Please try again."
       get_user_address
@@ -103,14 +82,14 @@ class FoodBank::CLI
     continue = true
     until continue == false
      if banks.length > 0 
-       puts "\nThese are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]+1]}:"
+       puts "\nHere are the 5 closest food banks open at #{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]} on #{@days[@time[:day]]}:"
         for i in 0..4
           if banks[i] != nil
-            puts "#{i+1}. #{banks[i].name}: #{banks[1].program} (#{banks[i].distance.round(2)} miles)"
+            puts "#{i+1}. #{banks[i].name}: #{banks[i].program} (#{banks[i].distance.round(2)} miles)"
          end
        end
        #binding.pry
-       puts "\nEnter a number for info on one, 'all' for every food bank, or 'exit' if finished:"
+       puts "\nEnter a number for more info, 'all' for every food bank, or 'exit' if finished:"
        input = gets.strip
        if input == "exit"
          continue = false
@@ -173,29 +152,33 @@ class FoodBank::CLI
     
     until input_correct == true
       #enter time
-      puts "\nWhat time are you available? For example: '11:30'"
+      puts "\nWhat time are you available? For example: '11:30 AM'"
       input = gets.strip
       time_elements = input.split(":")
-      if time_elements.length == 2 && (time_elements[0].to_i > 0 && time_elements[0].to_i < 13) && (time_elements[1].to_i > -1 && time_elements[1].to_i < 60)
+      minutes = time_elements[1][0,2]
+      ampm = time_elements[1][3,5]
+      #binding.pry
+      if time_elements.length == 2 && (time_elements[0].to_i > 0 && time_elements[0].to_i < 13) && (minutes.to_i > -1 && minutes.to_i < 60) && (ampm == "AM" || ampm == "PM")
         input_correct = true
       end
     end
     
     @time[:hour] = time_elements[0]
-    @time[:minutes] = time_elements[1]
+    @time[:minutes] = minutes
+    @time[:ampm] = ampm
     
-    input_correct = false
+    #input_correct = false
     
-    until input_correct == true
+    #until input_correct == true
       #enter AM / PM
-      puts "\nAM or PM? For example 'AM'"
-      input = gets.strip
-      if input == "AM" || input == "PM"
-        input_correct = true
-      end
-    end
+    #  puts "\nAM or PM? For example 'AM'"
+    #  input = gets.strip
+    #  if input == "AM" || input == "PM"
+    #    input_correct = true
+    #  end
+    #end
     
-    @time[:ampm] = input
+    #@time[:ampm] = input
     
   end
   

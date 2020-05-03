@@ -26,7 +26,6 @@ class FoodBank::Scraper
   #page.css("li[data-category='news']")
   
   def self.scrape_banks(path)
-    #xml = File.read('fixtures/Food_Bank_For_NYC_Open_Members_as_of_42820.kml')
     xml = File.read(path)
     doc = Nokogiri::XML(xml)  
     banks = []
@@ -40,6 +39,13 @@ class FoodBank::Scraper
       days[4] = bank.css("ExtendedData Data[name='Thursday']").text.strip
       days[5] = bank.css("ExtendedData Data[name='Friday']").text.strip
       days[6] = bank.css("ExtendedData Data[name='Saturday']").text.strip
+      
+      duplicate = false
+      
+      #Skip duplicate entries
+      #if banks.detect { |x| (x[:name] == bank.css("name").text.strip) && (x[:program] == bank.css("ExtendedData Data[name='Program Type']").text.strip) && (x[:address] == bank.css("address").text.strip) }
+        #duplicate = true 
+      #end
       
       banks[index] = {
         :name => bank.css("name").text.strip,
