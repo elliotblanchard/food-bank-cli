@@ -95,6 +95,7 @@ class FoodBank::CLI
     continue = true
     until continue == false
      if banks != nil
+       #binding.pry
        print "\nHere are the 5 closest food banks open at "
        print "#{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]}".colorize(:light_blue) 
        print " on "
@@ -106,7 +107,7 @@ class FoodBank::CLI
             print "(#{banks[i].distance.round(2)} miles)\n".colorize(:yellow)
          end
        end
-       puts "Call ahead to confirm hours."
+       puts "\n\nCall ahead to confirm hours."
        print "\nEnter a number for more info, '"
        print "all".colorize(:green)
        print "' for every food bank, or '"
