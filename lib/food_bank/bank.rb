@@ -1,6 +1,6 @@
 class FoodBank::Bank
 
-  attr_accessor :name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
+  attr_accessor :name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance, :location
 
   @@all = []
 

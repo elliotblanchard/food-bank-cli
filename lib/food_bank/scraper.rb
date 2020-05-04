@@ -30,6 +30,8 @@ class FoodBank::Scraper
     doc = Nokogiri::XML(xml)  
     banks = []
     
+    puts "Looking up food bank locations: "
+    
     doc.css("Placemark").each_with_index do |bank, index|
       days = []
       days[0] = bank.css("ExtendedData Data[name='Sunday']").text.strip
@@ -51,10 +53,14 @@ class FoodBank::Scraper
         :state => bank.css("ExtendedData Data[name='State']").text.strip,
         :zip => bank.css("ExtendedData Data[name='ZIP Code']").text.strip,
         :days => days,
-        :distance => 0
+        :distance => 0,
+        :location => FoodBank::Mapping.get_location(bank.css("address").text.strip) #Thru GeoKit via Google API
       }
-      
+      print "\b\b\b\b" 
+      percent_complete = (index.to_f+1.0)/doc.css("Placemark").length.to_f
+      print "#{(percent_complete.round(2)*100).to_i}%".colorize(:yellow).blink
     end
+    puts "\n"
     
     banks
     
