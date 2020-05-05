@@ -10,6 +10,8 @@ class FoodBank::CLI
   end
   
   def call
+    # Main program loop
+    
     make_banks #scrapes data and creates bank objects
     input = ""
     until input == "no"
@@ -26,7 +28,10 @@ class FoodBank::CLI
   end
   
   def make_banks
+    # Calls the scraper to create an array of food bank hashes
     banks_array = FoodBank::Scraper.scrape_banks(BASE_PATH)
+    
+    # Uses that array of hashes to create object for each food bank
     FoodBank::Bank.create_from_collection(banks_array)
   end 
   
@@ -34,12 +39,14 @@ class FoodBank::CLI
     #Find food banks open at the right time
     same_time = FoodBank::Bank.find_by_time(@time)
     if same_time.length > 0
+      # Get distance between the user and every food bank open at the right time / day
       banks_sorted = FoodBank::Mapping.get_distance(@user_address,same_time)
     end
     banks_sorted
   end
   
   def get_user_info
+    # Collects data from user
     get_user_address
     get_user_day_time
   end
@@ -89,10 +96,10 @@ class FoodBank::CLI
   end
   
   def list_banks(banks)
+    # Lists the 5 closest food banks
     continue = true
     until continue == false
      if banks != nil
-       #binding.pry
        print "\nHere are the 5 closest food banks open at "
        print "#{@time[:hour]}:#{@time[:minutes]} #{@time[:ampm]}".colorize(:light_blue) 
        print " on "
@@ -130,6 +137,7 @@ class FoodBank::CLI
   end
   
   def print_banks(banks,index)
+    # Prints detailed data on selected food banks
     #:name, :address, :contact, :phone, :program, :city, :state, :zip, :days, :distance
     if banks[index] != nil
       print "Name:".colorize(:yellow)
